@@ -7,14 +7,20 @@
     @apply text-base rounded-lg w-full
   }
   .btn-blue {
-    @apply bg-blue-omega text-white font-bold py-2 px-4 rounded;
+    @apply bg-blue-omega text-white font-bold py-2 px-4 rounded-xl;
   }
   .btn-blue:hover {
     @apply hover:bg-blue-700 focus:outline-none;
   }
   .input {
-    @apply w-full mb-2 border-2 border-gray-placeholder p-3 rounded
-    outline-none focus:border-blue-omega
+    @apply w-full mb-2 border-2 border-gray-placeholder p-3 rounded-xl
+    outline-none focus:border-blue-omega 
+  }
+  .input::after {
+    @apply shadow-sm
+  }
+  .input::placeholder {
+    @apply text-xs
   }
 
 }
