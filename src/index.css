@@ -6,6 +6,9 @@
   .btn{
     @apply text-base rounded-lg w-full
   }
+  .links{
+    @apply text-base rounded-lg w-full flex mx-auto items-center justify-center
+  }
   .btn-blue {
     @apply bg-blue-omega text-white font-bold py-2 px-4 rounded-xl;
   }

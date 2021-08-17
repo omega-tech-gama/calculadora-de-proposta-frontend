@@ -13,7 +13,7 @@ export const SignUp = () => {
             <Input type="text" name="email" label="E-mail" placeholder="jane@doe.com"/>
             <Input type="password" name="email" label="Senha" placeholder="1234"/>
             <button className="btn btn-blue">Entrar</button>
-            <button className="btn font-basic text-blue-omega">Criar uma conta</button>
+            <a href="/create" className="links font-basic text-blue-omega">Criar uma conta</a>
           </form>
         </div>
       </div>

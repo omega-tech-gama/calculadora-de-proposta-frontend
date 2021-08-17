@@ -14,7 +14,7 @@ export const Create = () => {
             <Input label="Senha" name="nome" placeholder="Digite uma senha segura" type="text"/>
             
             <button className="btn btn-blue">Criar conta</button>
-            <button className="btn font-basic text-blue-omega pb-20">Acessar sua conta</button>
+            <a href="/" className="links font-basic text-blue-omega pb-20">Acessar sua conta</a>
           </form>
         </div>
       </div>
