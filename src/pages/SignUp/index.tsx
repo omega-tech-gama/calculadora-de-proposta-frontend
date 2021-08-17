@@ -10,7 +10,7 @@ export const SignUp = () => {
           <img src={logoMobile} className="md:hidden mt-10 mx-auto w-16" alt="Logo empresa"  />
         </div>
         <div className="flex flex-col mx-auto items-center justify-center w-1/2">
-          <h1 className=" pb-10 text-2xl sm:text-3xl md:text-4xl font-semibold  text-color-letter">Acesse sua conta</h1>
+          <h1 className=" py-10 text-base sm:text-2xl lg:text-3xl font-semibold  text-color-letter">Acesse sua conta</h1>
           <form action="" className="space-y-4 w-full">
             <div>
               <label className="block font-bold text-gray-500">E-mail</label>
