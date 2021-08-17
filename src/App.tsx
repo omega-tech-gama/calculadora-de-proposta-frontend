@@ -1,9 +1,7 @@
-import { Create } from "./pages/Create";
+import Routes from '../routes';
 
 export function App() {
   return (
-    <>
-      <Create />
-    </>
-  );
+    <Routes />
+  ); 
 }
