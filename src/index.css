@@ -41,7 +41,7 @@
   .text {
     @apply text-gray-500 text-base font-roboto font-normal;
   }
-  .text-success  {
+  .success  {
     @apply text text-success;
   }
   .placeholder {
