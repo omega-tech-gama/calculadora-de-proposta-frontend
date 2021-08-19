@@ -1,12 +1,18 @@
+<<<<<<< HEAD
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+=======
+import { useContext } from 'react'
+import { AuthContext } from '../../context/AuthContext'
+>>>>>>> 37102974d6a51d877dca1001a12cb3451f05e6d3
 
-import { SubmitHandler, useForm } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { SubmitHandler, useForm } from 'react-hook-form'
+import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
 
-import { Input } from "../../components/Form/Input";
-import { SideLeft } from "../../components/SideLeft";
+import { Input } from '../../components/Form/Input'
+import { SideLeft } from '../../components/SideLeft'
+import { useHistory } from 'react-router-dom'
 
 interface ILoginUserFormData {
   email: string;
@@ -31,9 +37,9 @@ export const SignIn = () => {
 
   const { register, handleSubmit, formState } = useForm<ILoginUserFormData>({
     resolver: yupResolver(loginFormSchema),
-  });
+  })
 
-  const { errors } = formState;
+  const { errors } = formState
 
   const handleLogin: SubmitHandler<ILoginUserFormData> = async (dados) => {
     const a = await signIn(data);
@@ -53,24 +59,24 @@ export const SignIn = () => {
             className="space-y-4 w-full"
           >
             <Input
-              className={errors.email ? "input err" : "input"}
+              className={errors.email ? 'input err' : 'input'}
               type="email"
               label="E-mail"
               placeholder="jane@doe.com"
-              {...register("email")}
+              {...register('email')}
             />
             {errors.email && (
               <p className="text-red-500">{errors.email.message}</p>
             )}
             <Input
-              className={errors.senha ? "input err" : "input"}
+              className={errors.password ? 'input err' : 'input'}
               type="password"
               label="Senha"
               placeholder="1234"
-              {...register("senha")}
+              {...register('password')}
             />
-            {errors.senha && (
-              <p className="text-red-500">{errors.senha.message}!</p>
+            {errors.password && (
+              <p className="text-red-500">{errors.password.message}!</p>
             )}
             <button type="submit" className="btn btn-blue">
               Entrar
@@ -82,5 +88,5 @@ export const SignIn = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
