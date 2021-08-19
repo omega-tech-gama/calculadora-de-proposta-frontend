@@ -1,6 +1,11 @@
 import { createContext, useState, useEffect, ReactNode } from 'react';
 import {api} from "../api";
 
+type TData = {
+  access_token: string;
+  name: string;
+}
+
 type TSignInCredentials = {
   email: string;
   password: string;
@@ -8,8 +13,6 @@ type TSignInCredentials = {
 
 type TAuthContextData = {
   signIn( credentials: TSignInCredentials): Promise<void>;
-  access_token: string;
-  name: string;
 };
 
 type TAuthContextProviderProps = {
@@ -19,22 +22,15 @@ type TAuthContextProviderProps = {
 export const AuthContext = createContext({} as TAuthContextData);
 
 export function AuthContextProvider(props: TAuthContextProviderProps){
-  const access_token = '1'; 
-  const name = '2';
-
+  const [data, setData] = useStete<TData>()
   async function signIn({ email, password }: TSignInCredentials) {
     try {
-      const config =  {
-        data: {
-          email: email,
-          password: password,
-        },
-      }
+      const response = await api.post('users/login', {
+        email: email,
+        password: password,
+      })
 
-      console.log(email, password)
-
-      const response = await api.post('login', config)
-
+      console.log(response)
       
       
     } catch (error) {
@@ -44,7 +40,7 @@ export function AuthContextProvider(props: TAuthContextProviderProps){
   }
 
   return (
-    <AuthContext.Provider value={{ signIn, access_token, name }}>
+    <AuthContext.Provider value={{ signIn }}>
       {props.children}
     </AuthContext.Provider>
   )

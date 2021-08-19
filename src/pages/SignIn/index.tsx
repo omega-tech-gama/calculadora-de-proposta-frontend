@@ -9,8 +9,8 @@ import { Input } from "../../components/Form/Input";
 import { SideLeft } from "../../components/SideLeft";
 
 interface ILoginProps {
-  email: 'teste@teste.com';
-  senha: '12345678';
+  email: string;
+  senha: string;
 }
 
 const loginFormSchema = yup.object().shape({
