@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
-=======
-import { useContext } from 'react'
-import { AuthContext } from '../../context/AuthContext'
->>>>>>> 37102974d6a51d877dca1001a12cb3451f05e6d3
 
 import { SubmitHandler, useForm } from 'react-hook-form'
 import * as yup from 'yup'
@@ -16,7 +11,7 @@ import { useHistory } from 'react-router-dom'
 
 interface ILoginUserFormData {
   email: string;
-  senha: string;
+  password: string;
 }
 
 const loginFormSchema = yup.object().shape({
@@ -24,7 +19,7 @@ const loginFormSchema = yup.object().shape({
     .string()
     .required(`Email necessita ser informado!`)
     .email(`Oh guri isso não é um email!`),
-  senha: yup.string().required(`Senha não informada!`),
+  password: yup.string().required(`Senha não informada!`),
 });
 
 const data = {
