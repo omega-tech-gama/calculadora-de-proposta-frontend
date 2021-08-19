@@ -1,29 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap');
 
 @layer components {
   .btn{
-    @apply text-white text-sm font-semibold py-8 px-16 rounded-xl;
+    @apply flex justify-center items-center text-white text-sm font-semibold py-2 px-4 rounded-xl;
   }
   .btn:hover {
     @apply focus:outline-none;
   }
   .btn-primary {
-    @apply btn bg-blue-omega;
+    @apply bg-blue-omega;
   }
   .btn-primary:hover {
-    @apply hover:bg-blue-700;
+    @apply hover:bg-blue-600;
   }
   .btn-warn {
-    @apply btn bg-warn;
+    @apply bg-warn;
   }
   .btn-warn:hover {
     @apply hover:bg-red-500;
   }
   .btn-outlined {
-    @apply btn text-darkblue-omega;
+    @apply text-darkblue-omega;
   }
   .btn-outlined:hover {
     @apply bg-blue-50;
@@ -44,14 +44,27 @@
   .success  {
     @apply text text-success;
   }
+  .warn  {
+    @apply text text-warn;
+  }
   .placeholder {
     @apply text-gray-placeholder text-sm font-roboto font-normal;
   }
-
   .title1 {
     @apply text-darkblue-omega text-4xl font-roboto font-normal;
   }
   .title2 {
     @apply text-darkblue-omega text-xl font-roboto font-normal;
   }
+  .nav-link {
+    @apply text text-darkblue-omega text-sm uppercase font-medium hover:bg-light rounded-md p-2
+  }
+}
+
+html, body, #root {
+  @apply h-full
+}
+
+body {
+  @apply bg-light
 }
