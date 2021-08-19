@@ -4,7 +4,7 @@ import {api} from "../api";
 type TData = {
   access_token: string;
   name: string;
-}
+};
 
 type TSignInCredentials = {
   email: string;
@@ -22,7 +22,7 @@ type TAuthContextProviderProps = {
 export const AuthContext = createContext({} as TAuthContextData);
 
 export function AuthContextProvider(props: TAuthContextProviderProps){
-  const [data, setData] = useStete<TData>()
+  const [data, setData] = useState<TData>()
   async function signIn({ email, password }: TSignInCredentials) {
     try {
       const response = await api.post('users/login', {
@@ -30,18 +30,22 @@ export function AuthContextProvider(props: TAuthContextProviderProps){
         password: password,
       })
 
-      console.log(response)
-      
+      setData({
+        name: response.data.user.name,
+        access_token: response.data.access_token,
+      })
+
       
     } catch (error) {
-        console.error(error.message);
-    }
-    
-  }
+      console.error(error.message);
+    } 
 
+    console.log(data);
+  }
+  
   return (
     <AuthContext.Provider value={{ signIn }}>
       {props.children}
     </AuthContext.Provider>
   )
-}
+};
