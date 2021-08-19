@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
-import { Create } from "./src/pages/Create";
-import { SignUp } from "./src/pages/SignUp";
+import { Create } from "./pages/Create";
+import { SignUp } from "./pages/SignUp";
 
 function Routes(){
   return (
