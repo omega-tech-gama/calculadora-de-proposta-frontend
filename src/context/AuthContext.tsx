@@ -1,28 +1,30 @@
-import { createContext, useState, useEffect, ReactNode } from 'react';
-import {api} from "../api";
+import { createContext, useState, useEffect, ReactNode } from 'react'
+import { api } from '../api'
 
 type TData = {
-  access_token: string;
-  name: string;
+  access_token: string
+  name: string
 }
 
 type TSignInCredentials = {
-  email: string;
-  password: string;
-};
+  email: string
+  password: string
+}
 
 type TAuthContextData = {
-  signIn( credentials: TSignInCredentials): Promise<void>;
-};
+  signIn(credentials: TSignInCredentials): Promise<void>
+  data: TData | undefined
+}
 
 type TAuthContextProviderProps = {
-  children: ReactNode;
-};
+  children: ReactNode
+}
 
-export const AuthContext = createContext({} as TAuthContextData);
+export const AuthContext = createContext({} as TAuthContextData)
 
-export function AuthContextProvider(props: TAuthContextProviderProps){
-  const [data, setData] = useStete<TData>()
+export function AuthContextProvider(props: TAuthContextProviderProps) {
+  const [data, setData] = useState<TData>()
+
   async function signIn({ email, password }: TSignInCredentials) {
     try {
       const response = await api.post('users/login', {
@@ -30,17 +32,18 @@ export function AuthContextProvider(props: TAuthContextProviderProps){
         password: password,
       })
 
+      setData({
+        name: response.data.user.name,
+        access_token: response.data.access_token,
+      })
       console.log(response)
-      
-      
     } catch (error) {
-        console.error(error.message);
+      console.error(error.message)
     }
-    
   }
 
   return (
-    <AuthContext.Provider value={{ signIn }}>
+    <AuthContext.Provider value={{ signIn, data }}>
       {props.children}
     </AuthContext.Provider>
   )
