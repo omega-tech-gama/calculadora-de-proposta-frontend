@@ -1,26 +1,57 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&display=swap');
 
 @layer components {
   .btn{
-    @apply text-base rounded-lg w-full
+    @apply text-white text-sm font-semibold py-8 px-16 rounded-xl;
   }
-  .btn-blue {
-    @apply bg-blue-omega text-white font-bold py-2 px-4 rounded-xl;
+  .btn:hover {
+    @apply focus:outline-none;
   }
-  .btn-blue:hover {
-    @apply hover:bg-blue-700 focus:outline-none;
+  .btn-primary {
+    @apply btn bg-blue-omega;
+  }
+  .btn-primary:hover {
+    @apply hover:bg-blue-700;
+  }
+  .btn-warn {
+    @apply btn bg-warn;
+  }
+  .btn-warn:hover {
+    @apply hover:bg-red-500;
+  }
+  .btn-outlined {
+    @apply btn text-darkblue-omega;
+  }
+  .btn-outlined:hover {
+    @apply bg-blue-50;
   }
   .input {
     @apply w-full mb-2 border-2 border-gray-placeholder p-3 rounded-xl
     outline-none focus:border-blue-omega 
   }
   .input::after {
-    @apply shadow-sm
+    @apply shadow-sm;
   }
   .input::placeholder {
-    @apply text-xs
+    @apply text-xs;
+  }
+  .text {
+    @apply text-gray-500 text-base font-roboto font-normal;
+  }
+  .success  {
+    @apply text text-success;
+  }
+  .placeholder {
+    @apply text-gray-placeholder text-sm font-roboto font-normal;
   }
 
+  .title1 {
+    @apply text-darkblue-omega text-4xl font-roboto font-normal;
+  }
+  .title2 {
+    @apply text-darkblue-omega text-xl font-roboto font-normal;
+  }
 }
