@@ -3,20 +3,20 @@
 @tailwind utilities;
 
 @layer components {
-  .btn{
-    @apply text-base rounded-lg w-full
-  }
   .links{
     @apply text-base rounded-lg w-full flex mx-auto items-center justify-center
+  }
+  .btn{
+    @apply text-base rounded-lg w-full
   }
   .btn-blue {
     @apply bg-blue-omega text-white font-bold py-2 px-4 rounded-xl;
   }
   .btn-blue:hover {
-    @apply hover:bg-blue-700 focus:outline-none;
+    @apply bg-blue-700 transition duration-500 ease-in-out;
   }
   .input {
-    @apply w-full mb-2 border-2 border-gray-placeholder p-3 rounded-xl
+    @apply w-full border-2 border-gray-placeholder p-2 rounded-xl
     outline-none focus:border-blue-omega 
   }
   .input::after {
@@ -24,6 +24,9 @@
   }
   .input::placeholder {
     @apply text-xs
+  }
+  .err{
+    @apply border-red-600
   }
 
 }
