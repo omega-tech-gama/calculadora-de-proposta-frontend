@@ -3,13 +3,19 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
-      colors:{
+      colors: {
         'blue-omega': '#3980FF',
-        'gray-background': '#F3F3F5',
+        'darkblue-omega': '#26395F',
+        'light': '#F4F7FA',
         'gray-placeholder': '#9AA4B6',
-        'color-letter': '#26395F'
+        'warn': '#FF5C5C',
+        'success': '#10B981'
       },
+      fontFamily: {
+        roboto: ['Roboto', 'sans-serif']
+      }
     },
+
   },
   variants: {
     extend: {},
