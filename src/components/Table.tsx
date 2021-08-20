@@ -1,7 +1,7 @@
 import { CheckCircleIcon, TrashIcon } from "@heroicons/react/outline";
 import { Button } from "./Button";
-import { formatDate } from '../helpers/format-date';
-import { formatCurrency } from '../helpers/format-currency';
+import { formatDate } from '../utils/format-date';
+import { formatCurrency } from '../utils/format-currency';
 import { Modal } from "./Modal";
 import { useState } from 'react'
 import { IProposals, IProposal } from '../interfaces/proposals';
