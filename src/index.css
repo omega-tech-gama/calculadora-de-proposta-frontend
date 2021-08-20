@@ -39,7 +39,7 @@
     @apply text-xs;
   }
   .text {
-    @apply text-gray-500 text-base font-roboto font-normal;
+    @apply text-gray-500 text-sm font-roboto font-normal;
   }
   .success  {
     @apply text text-success;
@@ -48,16 +48,22 @@
     @apply text text-warn;
   }
   .placeholder {
-    @apply text-gray-placeholder text-sm font-roboto font-normal;
+    @apply text-gray-placeholder text-sm text;
   }
   .title1 {
-    @apply text-darkblue-omega text-4xl font-roboto font-normal;
+    @apply text-darkblue-omega text-4xl text;
   }
   .title2 {
-    @apply text-darkblue-omega text-xl font-roboto font-normal;
+    @apply title1 text-2xl;
   }
   .nav-link {
     @apply text text-darkblue-omega text-sm uppercase font-medium hover:bg-light rounded-md p-2
+  }
+  .status-label {
+    @apply text text-sm bg-gray-200 rounded-full px-3 py-1
+  }
+  .status-label-success {
+    @apply text text-sm bg-green-100 text-green-800 rounded-full px-3 py-1
   }
 }
 
