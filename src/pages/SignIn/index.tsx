@@ -1,45 +1,50 @@
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 
-import { SubmitHandler, useForm } from 'react-hook-form'
-import * as yup from 'yup'
-import { yupResolver } from '@hookform/resolvers/yup'
+import { SubmitHandler, useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
-import { Input } from '../../components/Form/Input'
-import { SideLeft } from '../../components/SideLeft'
-import { useHistory } from 'react-router-dom'
+import { Input } from "../../components/Form/Input";
+import { SideLeft } from "../../components/SideLeft";
+import { useHistory } from "react-router-dom";
 
-interface ILoginUserFormData {
+interface ILoginProps {
   email: string;
   password: string;
 }
 
-const loginFormSchema = yup.object().shape({
-  email: yup
-    .string()
-    .required(`Email necessita ser informado!`)
-    .email(`Oh guri isso não é um email!`),
-  password: yup.string().required(`Senha não informada!`),
-});
-
-const data = {
-  email: "oioio@gmi.com",
-  password: "1234dsfsfssf9",
-};
-
 export const SignIn = () => {
-  const { signIn } = useContext(AuthContext);
+  const { signIn, data } = useContext(AuthContext);
+  const history = useHistory();
 
-  const { register, handleSubmit, formState } = useForm<ILoginUserFormData>({
-    resolver: yupResolver(loginFormSchema),
-  })
+  const Schema = yup.object().shape({
+    email: yup
+      .string()
+      .required(`Email necessita ser informado!`)
+      .email(`Coloque um email válido.`),
 
-  const { errors } = formState
+    password: yup
+      .string()
+      .min(8, `Senha de 8 caracteres ou mais!`)
+      .required(`Senha não informada!`),
+  });
 
-  const handleLogin: SubmitHandler<ILoginUserFormData> = async (dados) => {
-    const a = await signIn(data);
-    await console.log(a);
+  const { register, handleSubmit, formState } = useForm({
+    resolver: yupResolver(Schema),
+  });
+
+  const { errors } = formState;
+
+  const handleLogin: SubmitHandler<ILoginProps> = async (values) => {
+    console.log(values);
+    signIn(values);
   };
+
+  if (!!data) {
+    console.log(data);
+    history.push("/proposal");
+  }
 
   return (
     <>
@@ -54,26 +59,26 @@ export const SignIn = () => {
             className="space-y-4 w-full"
           >
             <Input
-              className={errors.email ? 'input err' : 'input'}
+              className={errors.email ? "input err" : "input"}
               type="email"
               label="E-mail"
               placeholder="jane@doe.com"
-              {...register('email')}
+              {...register("email")}
             />
             {errors.email && (
               <p className="text-red-500">{errors.email.message}</p>
             )}
             <Input
-              className={errors.password ? 'input err' : 'input'}
+              className={errors.password ? "input err" : "input"}
               type="password"
               label="Senha"
               placeholder="1234"
-              {...register('password')}
+              {...register("password")}
             />
             {errors.password && (
               <p className="text-red-500">{errors.password.message}!</p>
             )}
-            <button type="submit" className="btn btn-blue">
+            <button type="submit" className="btn btn-primary w-full">
               Entrar
             </button>
           </form>
@@ -83,5 +88,5 @@ export const SignIn = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};

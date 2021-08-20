@@ -1,41 +1,55 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-
+import * as yup from "yup";
 import { Input } from "../../components/Form/Input";
 import { SideLeft } from "../../components/SideLeft";
+import { useContext } from "react";
+import { useHistory } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
+import { useEffect } from "react";
 
 interface ICreateUserFormData {
   name: string;
   email: string;
-  senha: string;
+  password: string;
 }
 
-const createUserFormSchema = yup.object().shape({
-  name: yup
-    .string()
-    .min(3, `O usuário precisa ter mais de 3 caracteres.`)
-    .required(`Necessário que esse campo seja preenchido.`),
-
-  email: yup
-    .string()
-    .required(`Email necessita ser informado!`)
-    .email(`Coloque um email válido.`),
-  senha: yup
-    .string()
-    .min(8, `Senha de 8 caracteres ou mais!`)
-    .required(`Senha não informada!`),
-});
-
 export const Create = () => {
-  const { register, handleSubmit, formState } = useForm({
-    resolver: yupResolver(createUserFormSchema),
+  const { createAccount, data } = useContext(AuthContext);
+  const history = useHistory();
+
+  const Schema = yup.object().shape({
+    name: yup
+      .string()
+      .min(3, `O usuário precisa ter mais de 3 caracteres.`)
+      .required(`Necessário que esse campo seja preenchido.`),
+
+    email: yup
+      .string()
+      .required(`Email necessita ser informado!`)
+      .email(`Coloque um email válido.`),
+
+    password: yup
+      .string()
+      .min(8, `Senha de 8 caracteres ou mais!`)
+      .required(`Senha não informada!`),
   });
+
+  const { register, handleSubmit, formState } = useForm({
+    resolver: yupResolver(Schema),
+  });
+
   const { errors } = formState;
 
-  const handleCreateUserForm: SubmitHandler<ICreateUserFormData> = (values) => {
-    console.log(values);
+  const handleCreateUserForm: SubmitHandler<ICreateUserFormData> = async (
+    values
+  ) => {
+    createAccount(values);
   };
+
+  if (!!data) {
+    history.push("/proposal");
+  }
 
   return (
     <>
@@ -49,7 +63,6 @@ export const Create = () => {
             onSubmit={handleSubmit(handleCreateUserForm)}
             className="space-y-4 w-full"
           >
-           
             <Input
               className={errors.name ? "input err" : "input"}
               label="Nome"
@@ -71,16 +84,16 @@ export const Create = () => {
               <p className="text-red-500">{errors.email.message}</p>
             )}
             <Input
-              className={errors.senha ? "input err" : "input"}
+              className={errors.password ? "input err" : "input"}
               label="Senha"
               placeholder="Digite uma senha segura"
               type="password"
-              {...register("senha")}
+              {...register("password")}
             />
-            {errors.senha && (
-              <p className="text-red-500">{errors.senha.message}</p>
+            {errors.password && (
+              <p className="text-red-500">{errors.password.message}</p>
             )}
-            <button type="submit" className="btn btn-blue">
+            <button type="submit" className="btn btn-primary w-full">
               Criar conta
             </button>
           </form>
