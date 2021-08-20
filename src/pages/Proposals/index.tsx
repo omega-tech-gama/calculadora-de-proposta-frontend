@@ -6,42 +6,34 @@ import notFound from '../../assets/not-found.svg';
 import { useEffect, useState } from "react";
 import { IProposal } from '../../interfaces/proposals';
 import axios from 'axios';
+import { Loading } from "../../components/Loading";
 
 export const Proposals = () => {
-
   const [proposals, setProposals] = useState<IProposal[]>([]);
-  // const proposals = [
-  //   {
-  //     public_id: "123",
-  //     contratado: true,
-  //     data_inicio: "2021-08-20",
-  //     data_fim: "2022-08-20",
-  //     fonte_energia: "RENOVAVEL",
-  //     submercado: "NORTE",
-  //     consumo_total: "10",
-  //     valor_proposta: "300000"
-  //   },
-  //   {
-  //     public_id: "asd",
-  //     contratado: false,
-  //     data_inicio: "2021-08-20",
-  //     data_fim: "2023-08-20",
-  //     fonte_energia: "CONVENCIONAL",
-  //     submercado: "SUL",
-  //     consumo_total: "20",
-  //     valor_proposta: "500000"
-  //   },
-  // ]
+  const [isLoading, setIsLoading] = useState(false);
+
+  async function getProposals() {
+    setIsLoading(true);
+    try {
+      let response = await axios.get<IProposal[]>('http://localhost:3000/propostas');
+      setProposals(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+    setIsLoading(false);
+  }
 
   useEffect(() => {
-		axios.get<IProposal[]>('http://localhost:3000/propostas').then(response => {
-			setProposals(response.data);
-		})
+    getProposals()
 	}, [])
 
   return (
     <BaseLayout>
-      {proposals.length > 0 ?
+      {isLoading ?
+      
+      <Loading/>
+      
+      : proposals.length > 0 ?
         <>
           <div className="flex justify-between items-end mb-6">
             <h1 className="title2">
