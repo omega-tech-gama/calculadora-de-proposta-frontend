@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Transition } from "@headlessui/react";
 import { Button } from './Button';
 import Logo from '../assets/logo.svg';
+import Omega from '../assets/omega.svg';
 import { MenuIcon, XIcon, LogoutIcon } from '@heroicons/react/outline'
 
 export const Header = () => {
@@ -15,7 +16,7 @@ export const Header = () => {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <div className="flex-shrink-0">
-            <img src={Logo} alt="Logo Omega" className="logo" />
+            <img src={Logo} alt="Logo Omega" />
             </div>
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4">
@@ -24,6 +25,7 @@ export const Header = () => {
                 </Link>
               </div>
             </div>
+            <img src={Omega} alt="Omega" className="w-24 ml-4 md:hidden" />
           </div>
           <div className="hidden md:block">
             <Button style="outlined">
@@ -37,7 +39,6 @@ export const Header = () => {
               type="button"
               className="inline-flex items-center justify-center p-2 text-darkblue-omega focus:outline-none focus:bg-light rounded-md"
             >
-              <span className="sr-only">Open main menu</span>
               {!isOpen ? (
                 <MenuIcon className="w-6"/>
               ) : (
@@ -61,6 +62,10 @@ export const Header = () => {
             <div className="p-2 space-y-1">
               <Link to="propostas" className="nav-link block px-3 py-2 rounded-md focus:bg-light">
                 Propostas
+              </Link>
+              <Link to="propostas" className="nav-link flex px-3 py-2 rounded-md focus:bg-light">
+                <LogoutIcon className="w-4 mr-1" />
+                Sair
               </Link>
             </div>
           </div>
