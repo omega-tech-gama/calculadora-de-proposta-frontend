@@ -29,7 +29,7 @@ interface ICharge {
   consumo_kwh: number;
 }
 
-export const Proposal = () => {
+export const NewProposal = () => {
   const [modalIsOpen, setModalUIsOpen] = useState(false);
   const [proposalData, setProposalData] = useState<IProposalData>();
   const [charge, setCharge] = useState<ICharge[]>();
