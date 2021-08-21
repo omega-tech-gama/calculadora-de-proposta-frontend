@@ -43,7 +43,7 @@ export const SignIn = () => {
 
   if (!!data) {
     console.log(data);
-    history.push("/proposal");
+    history.push("/propostas");
   }
 
   return (
