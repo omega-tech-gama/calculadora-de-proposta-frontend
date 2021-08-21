@@ -64,7 +64,7 @@ export const SignUp = () => {
           >
             <Input
               className={errors.name ? "input err" : "input"}
-              label="Nome"
+              labelName="Nome"
               type="text"
               {...register("name")}
             />
@@ -73,7 +73,7 @@ export const SignUp = () => {
             )}
             <Input
               className={errors.email ? "input err" : "input"}
-              label="E-mail"
+              labelName="E-mail"
               type="email"
               {...register("email")}
             />
@@ -82,7 +82,7 @@ export const SignUp = () => {
             )}
             <Input
               className={errors.password ? "input err" : "input"}
-              label="Senha"
+              labelName="Senha"
               type="password"
               {...register("password")}
             />

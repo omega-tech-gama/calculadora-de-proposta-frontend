@@ -1,20 +1,14 @@
-interface InputProps {
-  label?: string;
-  type: string;
-  placeholder?: string;
-  className?: string;
-}
+import { InputHTMLAttributes } from "react";
 
-export const Input = ({ label, type, placeholder,className, ...rest }:InputProps)  => {
+type InputProps = InputHTMLAttributes<HTMLInputElement> & {
+  labelName?: string;
+};
+
+export const Input = ({ labelName, ...props }: InputProps) => {
   return (
-    <div className="mt-4">
-      <label className="block font-bold text-gray-500">{label}</label>
-      <input
-        className={className}
-        type={type}
-        placeholder={placeholder} 
-        {...rest}  
-      />
+    <div>
+      <label className="block font-bold text-gray-500">{labelName}</label>
+      <input {...props} />
     </div>
   );
 };

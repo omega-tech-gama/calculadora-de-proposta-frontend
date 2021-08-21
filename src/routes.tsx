@@ -4,6 +4,7 @@ import { SignUp } from "./pages/SignUp";
 import { SignIn } from "./pages/SignIn";
 import { Proposals } from "./pages/Proposals";
 import { AuthContext } from "./context/AuthContext";
+import { Proposal } from "./pages/Proposal";
 
 function Routes() {
   const { data } = useContext(AuthContext);
@@ -14,6 +15,7 @@ function Routes() {
         <Route path="/" exact component={SignIn} />
         <Route path="/signup" component={SignUp} />
         <Route path="/propostas" component={Proposals} />
+        <Route path="/proposta" component={Proposal} />
       </Switch>
     </BrowserRouter>
   );
