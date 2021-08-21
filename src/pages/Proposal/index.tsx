@@ -13,6 +13,7 @@ import { Button } from "../../components/Button";
 import { Input } from "../../components/Form/Input";
 import { Modal } from "../../components/Modal";
 import { api } from "../../api";
+import { calculateProposal } from "../../utils/calculate-price";
 
 interface IProposalData {
   data_inicio: string;
@@ -27,8 +28,6 @@ interface IProposalData {
     }
   ];
 }
-
-interface IChargeData {}
 
 export const Proposal = () => {
   const [modalIsOpen, setModalUIsOpen] = useState(false);
@@ -59,7 +58,21 @@ export const Proposal = () => {
   });
 
   const key =
-    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlQHRlc3RlLmNvbSIsImlhdCI6MTYyOTUyNTU4NiwiZXhwIjoxNjI5NjExOTg2fQ.J24F_Qp9YBl5WPfcqp3fibJbltxiKrptjZNN2G9gF8Q";
+    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlQHRlc3RlLmNvbSIsImlhdCI6MTYyOTU0MTE2MCwiZXhwIjoxNjI5NjI3NTYwfQ.17l-UwLdI8BanltY_1c1jBjHNRTnvvRaqTc3LopFE3I";
+
+  const body = {
+    data_inicio: "2021-01-28",
+    data_fim: "2022-12-31",
+    cargas: [
+      {
+        nome_empresa: "teste",
+        consumo_kwh: 30,
+      },
+    ],
+    fonte_energia: proposalData?.fonte_energia,
+    submercado: proposalData?.submercado,
+    contratado: true,
+  };
 
   const proposalCreate = async () => {
     const response = await api("propostas", {
@@ -68,19 +81,7 @@ export const Proposal = () => {
         Authorization: key,
       },
 
-      data: {
-        data_inicio: proposalData?.data_inicio,
-        data_fim: proposalData?.data_fim,
-        cargas: [
-          {
-            nome_empresa: proposalData?.cargas[0].nome_empresa,
-            consumo_kwh: Number(proposalData?.cargas[0].consumo_kwh),
-          },
-        ],
-        fonte_energia: proposalData?.fonte_energia,
-        submercado: proposalData?.submercado,
-        contratado: true,
-      },
+      data: body,
     });
   };
 
@@ -88,7 +89,6 @@ export const Proposal = () => {
 
   const submitForm: SubmitHandler<IProposalData> = async (values) => {
     proposalCreate();
-    console.log(values);
   };
 
   const handleFormValues = () => {
@@ -120,7 +120,6 @@ export const Proposal = () => {
       cargas: [{ consumo_kwh: consumo, nome_empresa }],
     });
   };
-  console.log(proposalData);
 
   return (
     <BaseLayout>
@@ -173,8 +172,8 @@ export const Proposal = () => {
                       className="input text-sm text-gray-placeholder"
                       {...register("powerSupply")}
                     >
-                      <option>NATURAL</option>
-                      <option>SUSTENTAVEL</option>
+                      <option>RENOVAVEL</option>
+                      <option>CONVENCIONAL</option>
                     </select>
                   </div>
 
@@ -259,29 +258,55 @@ export const Proposal = () => {
           <div className="border-b border-gray-200 pt-4">
             <span className="font-medium text-gray-900 block">Período</span>
             <span className="mt-2 text-sm text-gray-500 block">
-              17/08/20201 até 17/08/2022
+              {proposalData?.data_fim && proposalData?.data_inicio
+                ? `${formatDate(proposalData.data_inicio)} até ${formatDate(
+                    proposalData.data_fim
+                  )}`
+                : `período de contrato`}
             </span>
           </div>
           <div className="border-b border-gray-200 pt-4">
             <span className="font-medium text-gray-900 block">
               Fonte de energia
             </span>
-            <span className="mt-2 text-sm text-gray-500 block">RENOVAVEL</span>
+            <span className="mt-2 text-sm text-gray-500 block">
+              {`${
+                proposalData?.fonte_energia
+                  ? proposalData?.fonte_energia
+                  : "Fonte"
+              }`}
+            </span>
           </div>
           <div className="border-b border-gray-200 pt-4">
             <span className="font-medium text-gray-900 block">Sub mercado</span>
-            <span className="mt-2 text-sm text-gray-500 block">NORTE</span>
+            <span className="mt-2 text-sm text-gray-500 block">{`${
+              proposalData?.submercado
+                ? proposalData?.submercado
+                : "Sub mercado"
+            }`}</span>
           </div>
           <div className="border-b border-gray-200 pt-4">
             <span className="font-medium text-gray-900 block">
               Consumo total
             </span>
-            <span className="mt-2 text-sm text-gray-500 block">20 kWh</span>
+            <span className="mt-2 text-sm text-gray-500 block">
+              {`${
+                proposalData?.cargas[0].consumo_kwh
+                  ? proposalData?.cargas[0].consumo_kwh
+                  : "Consumo em KW"
+              }
+              `}
+            </span>
           </div>
           <div className="flex justify-between border-gray-200 pt-2">
             <span className=" font-medium text-gray-900 ">Total</span>
             <span className="text-center font-light text-4xl block mt-8">
-              R$ 40,000
+              {`${
+                proposalData?.cargas[0].consumo_kwh
+                  ? calculateProposal(proposalData)
+                  : "Valor total"
+              }
+              `}
             </span>
           </div>
           {/* /End replace */}
