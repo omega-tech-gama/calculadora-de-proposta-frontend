@@ -65,7 +65,7 @@ export const Create = () => {
           >
             <Input
               className={errors.name ? "input err" : "input"}
-              label="Nome"
+              labelName="Nome"
               placeholder="Jane Doe"
               type="text"
               {...register("name")}
@@ -75,7 +75,7 @@ export const Create = () => {
             )}
             <Input
               className={errors.email ? "input err" : "input"}
-              label="E-mail"
+              labelName="E-mail"
               placeholder="jane@doe.com"
               type="email"
               {...register("email")}
@@ -85,7 +85,7 @@ export const Create = () => {
             )}
             <Input
               className={errors.password ? "input err" : "input"}
-              label="Senha"
+              labelName="Senha"
               placeholder="Digite uma senha segura"
               type="password"
               {...register("password")}

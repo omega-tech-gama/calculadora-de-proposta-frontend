@@ -37,7 +37,6 @@ export const SignIn = () => {
   const { errors } = formState;
 
   const handleLogin: SubmitHandler<ILoginProps> = async (values) => {
-    console.log(values);
     signIn(values);
   };
 
@@ -61,7 +60,7 @@ export const SignIn = () => {
             <Input
               className={errors.email ? "input err" : "input"}
               type="email"
-              label="E-mail"
+              labelName="E-mail"
               placeholder="jane@doe.com"
               {...register("email")}
             />
@@ -71,7 +70,7 @@ export const SignIn = () => {
             <Input
               className={errors.password ? "input err" : "input"}
               type="password"
-              label="Senha"
+              labelName="Senha"
               placeholder="1234"
               {...register("password")}
             />
