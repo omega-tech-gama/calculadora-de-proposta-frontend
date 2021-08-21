@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import { Create } from "./pages/Create";
+import { SignUp } from "./pages/SignUp";
 import { SignIn } from "./pages/SignIn";
 import { Proposals } from "./pages/Proposals";
 import { AuthContext } from "./context/AuthContext";
@@ -12,7 +12,7 @@ function Routes() {
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={SignIn} />
-        <Route path="/create" component={Create} />
+        <Route path="/signup" component={SignUp} />
         <Route path="/propostas" component={Proposals} />
       </Switch>
     </BrowserRouter>

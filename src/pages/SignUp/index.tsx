@@ -4,9 +4,8 @@ import * as yup from "yup";
 import { Input } from "../../components/Form/Input";
 import { SideLeft } from "../../components/SideLeft";
 import { useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
-import { useEffect } from "react";
 
 interface ICreateUserFormData {
   name: string;
@@ -14,25 +13,25 @@ interface ICreateUserFormData {
   password: string;
 }
 
-export const Create = () => {
+export const SignUp = () => {
   const { createAccount, data } = useContext(AuthContext);
   const history = useHistory();
 
   const Schema = yup.object().shape({
     name: yup
       .string()
-      .min(3, `O usuário precisa ter mais de 3 caracteres.`)
-      .required(`Necessário que esse campo seja preenchido.`),
+      .min(3, `Mínimo 3 caracteres`)
+      .required(`Insira seu nome`),
 
     email: yup
       .string()
-      .required(`Email necessita ser informado!`)
-      .email(`Coloque um email válido.`),
+      .required(`Insira seu e-mail`)
+      .email(`E-mail inválido`),
 
     password: yup
       .string()
-      .min(8, `Senha de 8 caracteres ou mais!`)
-      .required(`Senha não informada!`),
+      .min(8, `Mínimo 8 caracteres`)
+      .required(`Insira uma senha`),
   });
 
   const { register, handleSubmit, formState } = useForm({
@@ -55,18 +54,17 @@ export const Create = () => {
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 mx-auto">
         <SideLeft />
-        <div className="flex flex-col mx-auto items-center justify-center w-1/2">
-          <h1 className=" py-10 text-2xl lg:text-3xl font-semibold  text-color-letter">
+        <div className="flex flex-col items-center justify-center max-w-2x1 md:bg-white">
+          <h1 className="title1 py-4">
             Criar conta
           </h1>
           <form
             onSubmit={handleSubmit(handleCreateUserForm)}
-            className="space-y-4 w-full"
+            className="w-full max-w-xs"
           >
             <Input
               className={errors.name ? "input err" : "input"}
               label="Nome"
-              placeholder="Jane Doe"
               type="text"
               {...register("name")}
             />
@@ -76,7 +74,6 @@ export const Create = () => {
             <Input
               className={errors.email ? "input err" : "input"}
               label="E-mail"
-              placeholder="jane@doe.com"
               type="email"
               {...register("email")}
             />
@@ -86,20 +83,19 @@ export const Create = () => {
             <Input
               className={errors.password ? "input err" : "input"}
               label="Senha"
-              placeholder="Digite uma senha segura"
               type="password"
               {...register("password")}
             />
             {errors.password && (
               <p className="text-red-500">{errors.password.message}</p>
             )}
-            <button type="submit" className="btn btn-primary w-full">
+            <button type="submit" className="btn btn-primary w-full mt-6">
               Criar conta
             </button>
           </form>
-          <a href="/" className="links font-basic text-blue-omega py-8">
+          <Link to="/" className="links font-basic text-blue-omega mt-8">
             Acessar sua conta
-          </a>
+          </Link>
         </div>
       </div>
     </>
