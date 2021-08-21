@@ -6,7 +6,7 @@ import notFound from '../../assets/not-found.svg';
 import { useEffect, useState } from "react";
 import { IProposal } from '../../interfaces/proposals';
 import { Loading } from "../../components/Loading";
-import { api } from "../../api";
+import api from "../../api";
 
 export const Proposals = () => {
   const [proposals, setProposals] = useState<IProposal[]>([]);

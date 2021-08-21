@@ -12,7 +12,7 @@ import { BaseLayout } from "../../components/BaseLayout";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import { Modal } from "../../components/Modal";
-import { api } from "../../api";
+import api from "../../api";
 import { calculateProposal } from "../../utils/calculate-price";
 
 interface IProposalData {
