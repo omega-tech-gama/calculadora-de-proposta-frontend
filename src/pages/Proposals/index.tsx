@@ -5,8 +5,8 @@ import { PlusIcon } from '@heroicons/react/outline';
 import notFound from '../../assets/not-found.svg';
 import { useEffect, useState } from "react";
 import { IProposal } from '../../interfaces/proposals';
-import axios from 'axios';
 import { Loading } from "../../components/Loading";
+import { api } from "../../api";
 
 export const Proposals = () => {
   const [proposals, setProposals] = useState<IProposal[]>([]);
@@ -15,7 +15,7 @@ export const Proposals = () => {
   async function getProposals() {
     setIsLoading(true);
     try {
-      let response = await axios.get<IProposal[]>('http://localhost:3000/propostas');
+      let response = await api.get<IProposal[]>('/propostas');
       setProposals(response.data);
     } catch (error) {
       console.log(error);
