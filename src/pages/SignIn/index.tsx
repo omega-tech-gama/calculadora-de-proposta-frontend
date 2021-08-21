@@ -40,8 +40,7 @@ export const SignIn = () => {
     signIn(values);
   };
 
-  if (!!data) {
-    console.log(data);
+  if (data) {
     history.push("/propostas");
   }
 

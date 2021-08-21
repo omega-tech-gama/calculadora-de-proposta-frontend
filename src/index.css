@@ -31,6 +31,9 @@
   .btn-outlined:hover {
     @apply bg-blue-50;
   }
+  .btn-nav-link {
+    @apply text-darkblue-omega py-1 px-2;
+  }
   .input {
     @apply w-full border-2 border-gray-placeholder p-2 rounded-xl
     outline-none focus:border-blue-omega 
