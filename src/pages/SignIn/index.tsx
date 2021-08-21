@@ -5,7 +5,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { Input } from "../../components/Form/Input";
+import { Input } from "../../components/Input";
 import { SideLeft } from "../../components/SideLeft";
 import { Link, useHistory } from "react-router-dom";
 
@@ -37,12 +37,10 @@ export const SignIn = () => {
   const { errors } = formState;
 
   const handleLogin: SubmitHandler<ILoginProps> = async (values) => {
-    console.log(values);
     signIn(values);
   };
 
-  if (!!data) {
-    console.log(data);
+  if (data) {
     history.push("/propostas");
   }
 
@@ -51,7 +49,7 @@ export const SignIn = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 mx-auto">
         <SideLeft />
         <div className="flex flex-col items-center justify-center max-w-2x1 md:bg-white">
-          <h1 className="title1 py-4">
+          <h1 className="title1 py-6">
             Acesse sua conta
           </h1>
           <form
@@ -61,7 +59,7 @@ export const SignIn = () => {
             <Input
               className={errors.email ? "input err" : "input"}
               type="email"
-              label="E-mail"
+              labelName="E-mail"
               {...register("email")}
             />
             {errors.email && (
@@ -70,7 +68,7 @@ export const SignIn = () => {
             <Input
               className={errors.password ? "input err" : "input"}
               type="password"
-              label="Senha"
+              labelName="Senha"
               {...register("password")}
             />
             {errors.password && (

@@ -1,7 +1,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { Input } from "../../components/Form/Input";
+import { Input } from "../../components/Input";
 import { SideLeft } from "../../components/SideLeft";
 import { useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
@@ -55,7 +55,7 @@ export const SignUp = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 mx-auto">
         <SideLeft />
         <div className="flex flex-col items-center justify-center max-w-2x1 md:bg-white">
-          <h1 className="title1 py-4">
+          <h1 className="title1 py-6">
             Criar conta
           </h1>
           <form
@@ -64,7 +64,7 @@ export const SignUp = () => {
           >
             <Input
               className={errors.name ? "input err" : "input"}
-              label="Nome"
+              labelName="Nome"
               type="text"
               {...register("name")}
             />
@@ -73,7 +73,7 @@ export const SignUp = () => {
             )}
             <Input
               className={errors.email ? "input err" : "input"}
-              label="E-mail"
+              labelName="E-mail"
               type="email"
               {...register("email")}
             />
@@ -82,7 +82,7 @@ export const SignUp = () => {
             )}
             <Input
               className={errors.password ? "input err" : "input"}
-              label="Senha"
+              labelName="Senha"
               type="password"
               {...register("password")}
             />

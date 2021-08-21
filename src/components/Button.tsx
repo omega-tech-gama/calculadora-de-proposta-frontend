@@ -7,7 +7,7 @@ interface ButtonProps {
   onClick?: () => void
 }
 
-export const Button: React.FC<ButtonProps> = ({ style, children, icon, href, onClick }) => {
+export const Button: React.FC<ButtonProps> = ({ style, children, icon, href, ...rest }) => {
 
   const className = `btn btn-${style} ${icon && 'p-2'}`;
 
@@ -19,7 +19,7 @@ export const Button: React.FC<ButtonProps> = ({ style, children, icon, href, onC
     )
   } else {
     return (
-      <button onClick={onClick} className={className}>
+      <button {...rest} className={className}>
         {children}
       </button>
     )

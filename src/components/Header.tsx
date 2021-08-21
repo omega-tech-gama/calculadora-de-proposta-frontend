@@ -1,14 +1,22 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 import { Transition } from "@headlessui/react";
 import { Button } from './Button';
 import Logo from '../assets/logo.svg';
 import Omega from '../assets/omega.svg';
 import { MenuIcon, XIcon, LogoutIcon } from '@heroicons/react/outline'
+import { AuthContext } from "../context/AuthContext";
 
 export const Header = () => {
+  const { signOut } = useContext(AuthContext);
+  const history = useHistory();
 
   const [isOpen, setIsOpen] = useState(false);
+
+  async function handleLogout() {
+    signOut();
+    history.push("/");
+  }
 
   return (
     <nav className="bg-white border-b border-gray-200 shadow-sm">
@@ -28,7 +36,7 @@ export const Header = () => {
             <img src={Omega} alt="Omega" className="w-24 ml-4 md:hidden" />
           </div>
           <div className="hidden md:block">
-            <Button style="outlined">
+            <Button style="outlined" onClick={handleLogout}>
               <LogoutIcon className="w-5 mr-1" />
               Sair
             </Button>
@@ -63,10 +71,14 @@ export const Header = () => {
               <Link to="propostas" className="nav-link block px-3 py-2 rounded-md focus:bg-light">
                 Propostas
               </Link>
-              <Link to="propostas" className="nav-link flex px-3 py-2 rounded-md focus:bg-light">
+              <Button style="outlined" onClick={handleLogout}>
+                <LogoutIcon className="w-5 mr-1" />
+                Sair
+              </Button>
+              {/* <Link to="propostas" className="nav-link flex px-3 py-2 rounded-md focus:bg-light">
                 <LogoutIcon className="w-4 mr-1" />
                 Sair
-              </Link>
+              </Link> */}
             </div>
           </div>
       </Transition>
