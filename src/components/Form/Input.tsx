@@ -7,7 +7,7 @@ interface InputProps {
 
 export const Input = ({ label, type, placeholder,className, ...rest }:InputProps)  => {
   return (
-    <div>
+    <div className="mt-4">
       <label className="block font-bold text-gray-500">{label}</label>
       <input
         className={className}

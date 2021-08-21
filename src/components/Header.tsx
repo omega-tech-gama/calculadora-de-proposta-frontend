@@ -29,7 +29,7 @@ export const Header = () => {
           </div>
           <div className="hidden md:block">
             <Button style="outlined">
-              <LogoutIcon className="w-6 mr-1" />
+              <LogoutIcon className="w-5 mr-1" />
               Sair
             </Button>
           </div>
