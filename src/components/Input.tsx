@@ -6,7 +6,7 @@ type InputProps = InputHTMLAttributes<HTMLInputElement> & {
 
 export const Input = ({ labelName, ...props }: InputProps) => {
   return (
-    <div>
+    <div className="mt-4">
       <label className="block font-bold text-gray-500">{labelName}</label>
       <input {...props} />
     </div>
