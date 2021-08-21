@@ -21,17 +21,18 @@ interface IProposalData {
   fonte_energia: string;
   submercado: string;
   contratado: boolean;
-  cargas: [
-    {
-      nome_empresa: string;
-      consumo_kwh: number;
-    }
-  ];
+  consumo_kwh: number;
+}
+
+interface ICharge {
+  nome_empresa: string;
+  consumo_kwh: number;
 }
 
 export const Proposal = () => {
   const [modalIsOpen, setModalUIsOpen] = useState(false);
   const [proposalData, setProposalData] = useState<IProposalData>();
+  const [charge, setCharge] = useState<ICharge[]>();
 
   const { data } = useContext(AuthContext);
   const history = useHistory();
@@ -61,12 +62,11 @@ export const Proposal = () => {
     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlQHRlc3RlLmNvbSIsImlhdCI6MTYyOTU0MTE2MCwiZXhwIjoxNjI5NjI3NTYwfQ.17l-UwLdI8BanltY_1c1jBjHNRTnvvRaqTc3LopFE3I";
 
   const body = {
-    data_inicio: "2021-01-28",
-    data_fim: "2022-12-31",
+    data_inicio: proposalData?.data_inicio,
+    data_fim: proposalData?.data_fim,
     cargas: [
       {
-        nome_empresa: "teste",
-        consumo_kwh: 30,
+        ...charge,
       },
     ],
     fonte_energia: proposalData?.fonte_energia,
@@ -92,14 +92,7 @@ export const Proposal = () => {
   };
 
   const handleFormValues = () => {
-    const [
-      data_fim,
-      data_inicio,
-      fonte_energia,
-      submercado,
-      consumo_kwh,
-      nome_empresa,
-    ] = getValues([
+    const dataValues = getValues([
       "endDate",
       "initialDate",
       "powerSupply",
@@ -108,16 +101,35 @@ export const Proposal = () => {
       "companyName",
     ]);
 
+    const [
+      data_fim,
+      data_inicio,
+      fonte_energia,
+      submercado,
+      consumo_kwh,
+      nome_empresa,
+    ] = dataValues;
+
+    const dataInicio = data_inicio;
+    const dataFim = data_fim;
     const consumo = Number(consumo_kwh);
     const contratado = false;
 
+    setCharge([
+      {
+        consumo_kwh: consumo,
+        nome_empresa,
+        ...charge,
+      },
+    ]);
+
     setProposalData({
-      data_inicio,
-      data_fim,
+      data_inicio: dataInicio,
+      data_fim: dataFim,
       fonte_energia,
       submercado,
       contratado,
-      cargas: [{ consumo_kwh: consumo, nome_empresa }],
+      consumo_kwh: consumo,
     });
   };
 
@@ -217,8 +229,8 @@ export const Proposal = () => {
                     <span className="text-gray-placeholder">Carga</span>
                   </button>
 
-                  {!!proposalData?.cargas &&
-                    proposalData?.cargas.map((data) => (
+                  {!!charge &&
+                    charge.map((data) => (
                       <div className="block border-1 row-span-1 col-span-12 px-2 py-2 md:col-span-6 bg-white shadow-sm shadow rounded-lg">
                         <h3 className="leading-4 text-darkblue-omega font-bold">
                           Empresa
@@ -289,24 +301,12 @@ export const Proposal = () => {
             <span className="font-medium text-gray-900 block">
               Consumo total
             </span>
-            <span className="mt-2 text-sm text-gray-500 block">
-              {`${
-                proposalData?.cargas[0].consumo_kwh
-                  ? proposalData?.cargas[0].consumo_kwh
-                  : "Consumo em KW"
-              }
-              `}
-            </span>
+            <span className="mt-2 text-sm text-gray-500 block">"Consumo"</span>
           </div>
           <div className="flex justify-between border-gray-200 pt-2">
             <span className=" font-medium text-gray-900 ">Total</span>
             <span className="text-center font-light text-4xl block mt-8">
-              {`${
-                proposalData?.cargas[0].consumo_kwh
-                  ? calculateProposal(proposalData)
-                  : "Valor total"
-              }
-              `}
+              Valor Total
             </span>
           </div>
           {/* /End replace */}
