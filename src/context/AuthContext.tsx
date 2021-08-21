@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect, ReactNode } from "react";
-import { api } from "../api";
+import api from "../api";
 
 interface TData {
   access_token: string;
@@ -17,6 +17,7 @@ interface TCreateAccount extends TSignInCredentials {
 
 interface TAuthContextData {
   signIn(credentials: TSignInCredentials): Promise<void>;
+  signOut(): void;
   createAccount(credentials: TCreateAccount): Promise<void>;
   data: TData | undefined;
 }
@@ -27,8 +28,13 @@ interface TAuthContextProviderProps {
 
 export const AuthContext = createContext({} as TAuthContextData);
 
+export const TOKEN_KEY = "Token";
+export const isAuthenticated = () => localStorage.getItem(TOKEN_KEY) !== null;
+export const getToken = () => localStorage.getItem(TOKEN_KEY);
+
 export function AuthContextProvider(props: TAuthContextProviderProps) {
   const [data, setData] = useState<TData>();
+
 
   async function signIn({ email, password }: TSignInCredentials) {
     try {
@@ -41,9 +47,16 @@ export function AuthContextProvider(props: TAuthContextProviderProps) {
         name: response.data.user.name,
         access_token: response.data.access_token,
       });
+
+      localStorage.setItem(TOKEN_KEY, response.data.access_token);
     } catch (error) {
       console.error(error.message);
     }
+  }
+
+  function signOut() {
+      setData(undefined);
+      localStorage.removeItem(TOKEN_KEY);
   }
 
   async function createAccount({ name, email, password }: TCreateAccount) {
@@ -64,7 +77,7 @@ export function AuthContextProvider(props: TAuthContextProviderProps) {
   }
 
   return (
-    <AuthContext.Provider value={{ signIn, createAccount, data }}>
+    <AuthContext.Provider value={{ signIn, signOut, createAccount, data }}>
       {props.children}
     </AuthContext.Provider>
   );
