@@ -47,7 +47,7 @@ export const SignUp = () => {
   };
 
   if (!!data) {
-    history.push("/proposal");
+    history.push("/propostas");
   }
 
   return (

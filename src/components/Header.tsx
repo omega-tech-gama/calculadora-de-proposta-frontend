@@ -28,7 +28,7 @@ export const Header = () => {
             </div>
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4">
-                <Link to="propostas" className="nav-link px-3">
+                <Link to="/propostas" className="nav-link px-3">
                   Propostas
                 </Link>
               </div>

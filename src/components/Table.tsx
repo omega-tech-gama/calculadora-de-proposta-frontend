@@ -6,6 +6,7 @@ import { Modal } from "./Modal";
 import { useState } from 'react'
 import { IProposals, IProposal } from '../interfaces/proposals';
 import axios from "axios";
+import api from "../api";
 
 export const Table: React.FC<IProposals> = ({ proposals }) => {
 
@@ -35,8 +36,7 @@ export const Table: React.FC<IProposals> = ({ proposals }) => {
     let message: string = "";
 
     try {
-      const url = `http://localhost:3000/propostas/${id}`;
-      await axios.patch(url);
+      await api.patch(`/propostas/${id}`);
       message = "Proposta contratada com sucesso!";
     } catch (error) {
       message = "Erro ao contratar proposta.";
@@ -49,8 +49,7 @@ export const Table: React.FC<IProposals> = ({ proposals }) => {
     let message: string = "";
 
     try {
-      const url = `http://localhost:3000/propostas/${id}`;
-      await axios.delete(url);
+      await api.delete(`/propostas/${id}`);
       message = "Proposta excluída com sucesso!";
     } catch (error) {
       message = "Erro ao excluir proposta.";
