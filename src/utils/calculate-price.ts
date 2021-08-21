@@ -4,16 +4,11 @@ interface IProposalData {
   fonte_energia: string;
   submercado: string;
   contratado: boolean;
-  cargas: [
-    {
-      nome_empresa: string;
-      consumo_kwh: number;
-    }
-  ];
+  consumo_kwh: number;
 }
 export function calculateProposal(proposal: IProposalData) {
   const { data_inicio, data_fim, fonte_energia, submercado } = proposal;
-  const { consumo_kwh } = proposal.cargas[0];
+  const { consumo_kwh } = proposal;
 
   let price = 0;
   let sourcePrice = 0;
